@@ -27,7 +27,7 @@
             android:layout_height="90dp"
             android:src="@drawable/file"
             android:contentDescription="Empty file icon"
-            android:tint="@color/dark_gray" />
+            app:tint="@color/dark_gray" />
 
         <TextView
             android:id="@+id/textEmpty"
