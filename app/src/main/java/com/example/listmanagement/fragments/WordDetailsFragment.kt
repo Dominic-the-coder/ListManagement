@@ -25,7 +25,7 @@ class WordDetailsFragment : Fragment(R.layout.word_details_fragment) {
         val meaning = arguments?.getString("meaning")
         val synonyms = arguments?.getString("synonyms")
         val details = arguments?.getString("details")
-        val status = arguments?.getString("status") // <-- added
+        val status = arguments?.getString("status")
 
         view.findViewById<TextView>(R.id.tvTitle).text = title
         view.findViewById<TextView>(R.id.tvMeaning).text = meaning
@@ -55,7 +55,7 @@ class WordDetailsFragment : Fragment(R.layout.word_details_fragment) {
                     putString("meaning", meaning)
                     putString("synonyms", synonyms)
                     putString("details", details)
-                    putString("status", status) // <-- added
+                    putString("status", status)
                 }
             }
 
