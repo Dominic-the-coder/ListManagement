@@ -25,11 +25,20 @@ class WordDetailsFragment : Fragment(R.layout.word_details_fragment) {
         val meaning = arguments?.getString("meaning")
         val synonyms = arguments?.getString("synonyms")
         val details = arguments?.getString("details")
+        val status = arguments?.getString("status") // <-- added
 
         view.findViewById<TextView>(R.id.tvTitle).text = title
         view.findViewById<TextView>(R.id.tvMeaning).text = meaning
         view.findViewById<TextView>(R.id.tvSynonyms).text = synonyms
         view.findViewById<TextView>(R.id.tvDetails).text = details
+
+        val btnDone = view.findViewById<Button>(R.id.btnDone)
+
+        // Disable if already DONE
+        if (status == "DONE") {
+            btnDone.isEnabled = false
+            btnDone.alpha = 0.5f
+        }
 
         // BACK
         view.findViewById<ImageButton>(R.id.backButton).setOnClickListener {
@@ -46,6 +55,7 @@ class WordDetailsFragment : Fragment(R.layout.word_details_fragment) {
                     putString("meaning", meaning)
                     putString("synonyms", synonyms)
                     putString("details", details)
+                    putString("status", status) // <-- added
                 }
             }
 
@@ -83,7 +93,7 @@ class WordDetailsFragment : Fragment(R.layout.word_details_fragment) {
         }
 
         // DONE
-        view.findViewById<Button>(R.id.btnDone).setOnClickListener {
+        btnDone.setOnClickListener {
             AlertDialog.Builder(requireContext())
                 .setTitle("Are you sure?")
                 .setMessage("Mark this word as DONE?")
@@ -101,6 +111,10 @@ class WordDetailsFragment : Fragment(R.layout.word_details_fragment) {
                             )
                         )
                     }
+
+                    // Immediately disable after marking DONE
+                    btnDone.isEnabled = false
+                    btnDone.alpha = 0.5f
 
                     requireActivity().findViewById<View>(R.id.detailsContainer).visibility = View.GONE
                     requireActivity().supportFragmentManager.popBackStack()
